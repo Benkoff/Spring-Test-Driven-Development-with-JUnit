@@ -18,8 +18,8 @@ public class ContactsManagementServiceIntegrationTest {
 	
 	@Autowired
 	private ContactsManagementService contactsManagementService;
-	
-	
+
+
 	@Test
 	public void testAddContactHappyPath() {
 		
@@ -30,12 +30,13 @@ public class ContactsManagementServiceIntegrationTest {
 		
 		
 		// Test adding the contact
+        CustomerContact newContact = contactsManagementService.add(aContact);
 		
 		
 		// Verify the addition
-		//assertNotNull(newContact);
-		//assertNotNull(newContact.getId());
-		//assertEquals("Jenny", newContact.getFirstName());
+		assertNotNull(newContact);
+		assertNotNull(newContact.getId());
+		assertEquals("Jenny", newContact.getFirstName());
 		
 	}
 }
