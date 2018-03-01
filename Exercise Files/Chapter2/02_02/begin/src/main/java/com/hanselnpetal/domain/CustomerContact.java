@@ -1,5 +1,6 @@
 package com.hanselnpetal.domain;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -9,23 +10,31 @@ import javax.persistence.Table;
 @Entity
 @Table(name="customer_contact")
 public class CustomerContact {
-	
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
+    @Column(name = "first_name")
 	private String firstName;
+    @Column(name = "last_name")
 	private String lastName;
+    @Column(name = "email")
 	private String email;
+    @Column(name = "address_line_1")
 	private String deliveryAddressLine1;
+    @Column(name = "address_line_2")
 	private String deliveryAddressLine2;
+    @Column(name = "address_city")
 	private String deliveryAddressCity;
+    @Column(name = "address_state")
 	private String deliveryAddressState;
+    @Column(name = "address_zip_code")
 	private String deliveryAddressLZipCode;
 	
 	public CustomerContact() {
 		
 	}
-	
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+
 	public long getId() {
 		return id;
 	}

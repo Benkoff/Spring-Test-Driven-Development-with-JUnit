@@ -19,7 +19,6 @@ public class ContactsManagementServiceIntegrationTest {
 	@Autowired
 	private ContactsManagementService contactsManagementService;
 
-
 	@Test
 	public void testAddContactHappyPath() {
 		
@@ -27,8 +26,7 @@ public class ContactsManagementServiceIntegrationTest {
 		CustomerContact aContact = new CustomerContact();
 		aContact.setFirstName("Jenny");
 		aContact.setLastName("Johnson");
-		
-		
+
 		// Test adding the contact
         CustomerContact newContact = contactsManagementService.add(aContact);
 		
