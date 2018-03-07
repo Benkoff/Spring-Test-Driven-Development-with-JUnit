@@ -20,10 +20,11 @@ import com.hanselnpetal.domain.CustomerContact;
 @RunWith(MockitoJUnitRunner.class)
 @SpringBootTest(webEnvironment = WebEnvironment.NONE)
 public class ContactsManagementServiceUnitTest {
-	
+
+	@Mock
 	private CustomerContactRepository customerContactRepository;
-	
-	
+
+	@InjectMocks
 	private ContactsManagementService contactsManagementService;
 	
 	
@@ -40,12 +41,12 @@ public class ContactsManagementServiceUnitTest {
 		aMockContact.setFirstName("Jenny");
 		aMockContact.setLastName("Johnson");
 		
-		//when(customerContactRepository.save(any(CustomerContact.class))).thenReturn(aMockContact);
+		when(customerContactRepository.save(any(CustomerContact.class))).thenReturn(aMockContact);
 				
 		// Save the contact
-		
+		CustomerContact newContact = contactsManagementService.add(null);
 		
 		// Verify the save
-		
+		assertEquals("Jenny", newContact.getFirstName());
 	}
 }

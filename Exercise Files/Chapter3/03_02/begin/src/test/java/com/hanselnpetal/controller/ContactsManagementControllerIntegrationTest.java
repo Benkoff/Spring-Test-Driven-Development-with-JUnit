@@ -29,16 +29,20 @@ public class ContactsManagementControllerIntegrationTest {
 		aContact.setLastName("Johnson");
 		
 		// POST our CustomerContact form bean to the controller; check the outcome
-		
+		String outcome = contactsManagementController.processAddContactSubmit(aContact);
 		
 		// Assert THAT the outcome is as expected
-		
+		assertThat(outcome, is(equalTo("success")));
 	}
 	
 	@Test
 	public void testAddContactFirstNameMissing() {
 		CustomerContact aContact = new CustomerContact();
-		
-		
+
+		// POST our CustomerContact form bean to the controller; check the outcome
+		String outcome = contactsManagementController.processAddContactSubmit(aContact);
+
+		// Assert THAT the outcome is as expected
+		assertThat(outcome, is(equalTo("failure")));
 	}
 }
