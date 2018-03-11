@@ -1,9 +1,8 @@
 package com.hanselnpetal.data.repos;
 
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertThat;
-
+import com.github.springtestdbunit.DbUnitTestExecutionListener;
+import com.github.springtestdbunit.annotation.DatabaseSetup;
+import com.hanselnpetal.domain.CustomerContact;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,34 +16,34 @@ import org.springframework.test.context.support.DependencyInjectionTestExecution
 import org.springframework.test.context.support.DirtiesContextTestExecutionListener;
 import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
 
-import com.github.springtestdbunit.DbUnitTestExecutionListener;
-import com.github.springtestdbunit.annotation.DatabaseSetup;
-import com.hanselnpetal.domain.CustomerContact;
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
 
 @RunWith(SpringRunner.class)
 @DataJpaTest
 @AutoConfigureTestDatabase(replace=Replace.NONE)
 @TestExecutionListeners({ DependencyInjectionTestExecutionListener.class,
-    DirtiesContextTestExecutionListener.class,
-   TransactionalTestExecutionListener.class,
-    DbUnitTestExecutionListener.class })
+        DirtiesContextTestExecutionListener.class,
+        TransactionalTestExecutionListener.class,
+        DbUnitTestExecutionListener.class })
 @DatabaseSetup("classpath:test-datasets.xml")
-
 public class CustomerContactRepositoryDbUnitTest {
 
-	@Autowired
+    @Autowired
     private TestEntityManager entityManager;
-	
-	@Autowired
+
+    @Autowired
 	private CustomerContactRepository customerContactRepository;
 	
 	@Test
     public void testFindByEmail() {
 		
         // Find an inserted record
+        CustomerContact foundContact = customerContactRepository.findByEmail("elaine@myemail.com");
         
         // Assertion
-        
+        assertThat(foundContact.getEmail(), is(equalTo("elaine@myemail.com")));
     }
 	
 	@Test
