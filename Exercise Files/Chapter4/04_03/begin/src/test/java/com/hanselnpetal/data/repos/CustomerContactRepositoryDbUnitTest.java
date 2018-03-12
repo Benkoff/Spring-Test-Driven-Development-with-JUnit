@@ -3,6 +3,9 @@ package com.hanselnpetal.data.repos;
 import com.github.springtestdbunit.DbUnitTestExecutionListener;
 import com.github.springtestdbunit.annotation.DatabaseSetup;
 import com.hanselnpetal.domain.CustomerContact;
+import org.dbunit.database.DatabaseConfig;
+import org.dbunit.ext.mssql.MsSqlDataTypeFactory;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +13,7 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase.Replace;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
+import org.springframework.test.context.TestExecutionListener;
 import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
@@ -26,7 +30,8 @@ import static org.junit.Assert.assertThat;
 @TestExecutionListeners({ DependencyInjectionTestExecutionListener.class,
         DirtiesContextTestExecutionListener.class,
         TransactionalTestExecutionListener.class,
-        DbUnitTestExecutionListener.class })
+        DbUnitTestExecutionListener.class,
+        TestExecutionListener.class})
 @DatabaseSetup("classpath:test-datasets.xml")
 public class CustomerContactRepositoryDbUnitTest {
 
@@ -35,7 +40,7 @@ public class CustomerContactRepositoryDbUnitTest {
 
     @Autowired
 	private CustomerContactRepository customerContactRepository;
-	
+
 	@Test
     public void testFindByEmail() {
 		
